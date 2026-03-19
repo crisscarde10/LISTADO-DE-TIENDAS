@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Search Application</title>
+</head>
+<body>
+    <h1>Welcome to the Store Search Application</h1>
+    <form id="searchForm">
+        <input type="text" id="searchInput" placeholder="Search for stores...">
+        <button type="submit">Search</button>
+    </form>
+    <div id="results"></div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const query = document.getElementById('searchInput').value;
+            // Fetch stores based on the query
+            document.getElementById('results').innerHTML = `Searching for stores related to: ${query}`;
+        });
+    </script>
+</body>
+</html>
