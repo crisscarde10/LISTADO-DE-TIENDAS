@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .clock {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+        }
+        .timezone {
+            font-size: 24px;
+            padding: 20px;
+            border: 2px solid #3a3a3a;
+            border-radius: 10px;
+            background-color: #1e1e1e;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="timezone" id="new-york"></div>
+        <div class="timezone" id="london"></div>
+        <div class="timezone" id="tokyo"></div>
+        <div class="timezone" id="sydney"></div>
+        <div class="timezone" id="mexico-city"></div>
+        <div class="timezone" id="lima"></div>
+    </div>
+
+    <script>
+        function updateClocks() {
+            const now = new Date();
+            const timezones = {
+                "New York": -4,
+                "London": 0,
+                "Tokyo": 9,
+                "Sydney": 11,
+                "Mexico City": -6,
+                "Lima": -5,
+            };
+            for (const [city, offset] of Object.entries(timezones)) {
+                const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+                const localTime = new Date(utc + (3600000 * offset));
+                document.getElementById(city.toLowerCase().replace(' ', '-') ).innerText = `${city}: ${localTime.toISOString().slice(0, 19).replace('T', ' ')} UTC`;
+            }
+        }
+
+        setInterval(updateClocks, 1000);
+        updateClocks();
+    </script>
+</body>
+</html>
